@@ -1,0 +1,27 @@
+/* Oxford Talks deck viewer. Pitch dark, Dieter's tokens inlined (no web fonts, no third party anything). */
+:root { --bg:#000; --text:#E7E9EA; --muted:#80868B; --line:#1D1F23; --line2:#2F3336; --accent:#EC652B; --font:'Eloquia Display','Helvetica Neue',Helvetica,Arial,system-ui,sans-serif; }
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+.otv { position: fixed; inset: 0; display: grid; grid-template-rows: auto 1fr auto; }
+.top { display: flex; align-items: center; gap: 14px; padding: 14px 24px; border-bottom: 1px solid var(--line); }
+.mark { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 34; stroke-linecap: round; flex: none; }
+.title { font-size: 15px; font-weight: 300; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.title span { color: var(--muted); }
+.count { margin-left: auto; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stage { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
+.page { position: relative; box-shadow: 0 12px 40px rgba(0,0,0,.6); border-radius: 3px; overflow: hidden; background: #fff; }
+.page canvas { display: block; }
+.wm { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.wm span { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) rotate(-28deg); white-space: nowrap; font-size: clamp(14px, 3.2vw, 34px); font-weight: 300; letter-spacing: .04em; color: rgba(0,0,0,.075); }
+.wm small { position: absolute; right: 10px; bottom: 8px; font-size: 10px; color: rgba(0,0,0,.35); }
+.hit { position: absolute; top: 0; bottom: 0; width: 30%; cursor: pointer; z-index: 2; }
+.hit.prev { left: 0; } .hit.next { right: 0; }
+.bottom { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 14px 24px calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
+.btn { height: 36px; min-width: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line2); background: transparent; color: var(--text); font: inherit; font-size: 14px; cursor: pointer; }
+.btn:disabled { opacity: .35; cursor: default; }
+.progress { flex: 1; max-width: 420px; height: 2px; background: var(--line2); border-radius: 2px; overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s ease; }
+.msg { color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-align: center; padding: 0 24px; line-height: 1.8; }
+.msg.err { text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--text); }
+@media (max-width: 640px) { .top { padding: 10px 14px; } .bottom { gap: 10px; padding-left: 14px; padding-right: 14px; } .title span { display: none; } }
+@media print { body { display: none !important; } }
